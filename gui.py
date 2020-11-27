@@ -6,7 +6,7 @@ Created on Fri Nov 27 02:39:15 2020
 """
 
 from PyQt5 import uic,QtWidgets
-from dbms import Student
+from DBMS import Student
 
 
 def gotostudent():
@@ -65,12 +65,12 @@ def capturedata():
 
 app = QtWidgets.QApplication([])
 
-frontPage = uic.loadUi('UiFiles/FrontPage.ui')
-studentpage = uic.loadUi('UiFiles/student_login.ui')
-facultyLoginpage=uic.loadUi('UiFiles/faculty_login.ui')
-adminLoginpage=uic.loadUi('UiFiles/admin_login.ui')
-facultyDash=uic.loadUi('UiFiles/faculty_dashboard.ui')
-registerPage=uic.loadUi('UiFiles/student_register.ui')
+frontPage = uic.loadUi('FACE_ATTEND_GUI/FrontPage.ui')
+studentpage = uic.loadUi('FACE_ATTEND_GUI/student_login.ui')
+facultyLoginpage=uic.loadUi('FACE_ATTEND_GUI/faculty_login.ui')
+adminLoginpage=uic.loadUi('FACE_ATTEND_GUI/admin_login.ui')
+facultyDash=uic.loadUi('FACE_ATTEND_GUI/faculty_dashboard.ui')
+registerPage=uic.loadUi('FACE_ATTEND_GUI/student_register.ui')
 
 frontPage.show()
 

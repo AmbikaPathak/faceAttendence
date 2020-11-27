@@ -60,6 +60,16 @@ con.commit()
 con.close()
 
 
+con = sql.connect('Attendance_System.db')
+
+query = """ CREATE TABLE Student_attendence(SId TEXT,
+date TEXT, 
+attendence TEXT DEFAULT 'A',
+FOREIGN KEY (SId) REFERENCES student_details(SId) ON DELETE CASCADE ON UPDATE CASCADE)"""
+
+con.execute(query)
+con.commit()
+con.close()
 
 
 
