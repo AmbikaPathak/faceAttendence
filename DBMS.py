@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
++# -*- coding: utf-8 -*-
 """
 Created on Sat Nov 21 02:32:00 2020
 
@@ -81,7 +81,7 @@ class Student:
         
         emb = model.predict(self.preprocess(face_img))
         
-        curr=sql.connect("attendenceSym.db",detect_types=sql.PARSE_DECLTYPES)
+        curr=sql.connect("AttendanceSystem.db",detect_types=sql.PARSE_DECLTYPES)
         query="""INSERT INTO student_details(Sid,Sname,
                                             SclassId,
                                             SphoneNo,
