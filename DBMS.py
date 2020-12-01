@@ -1,16 +1,10 @@
-+# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 """
 Created on Sat Nov 21 02:32:00 2020
 
 @author: cttc
 """
 
-# -*- coding: utf-8 -*-
-"""
-Created on Sat Nov 21 15:52:30 2020
-
-@author: cttc
-"""
 import sqlite3 as sql
 import cv2
 import numpy as np
@@ -19,6 +13,8 @@ import io
 import urllib
 from keras_vggface import VGGFace
 from keras_vggface.utils import preprocess_input
+from datetime import datetime,timedelta
+
 
 model = VGGFace(model='resnet50',
                 include_top=False,
@@ -42,6 +38,9 @@ def convert_array(text):
 
 sql.register_adapter(np.ndarray, adapt_array)
 sql.register_converter("array", convert_array)
+
+
+
 
 
 class Student:
@@ -81,7 +80,7 @@ class Student:
         
         emb = model.predict(self.preprocess(face_img))
         
-        curr=sql.connect("AttendanceSystem.db",detect_types=sql.PARSE_DECLTYPES)
+        curr=sql.connect("Attendance_System.db",detect_types=sql.PARSE_DECLTYPES)
         query="""INSERT INTO student_details(Sid,Sname,
                                             SclassId,
                                             SphoneNo,
@@ -95,7 +94,43 @@ class Student:
         
         curr.commit()
         curr.close()                                       
+    def FetchStudentAttend(self, Sid, Startdate, Enddate):
+        conn = sql.connect("Attendance_System.db")
+        query ="""SELECT Sname FROM student_details WHERE Sid = ?"""
+        ret = conn.execute(query,(Sid,))
+        ret = ret.fetchall()
+        if len(ret) > 0:
+            atten = {'Roll':[Sid],'name' : ret[0][0]}
+            dateRange = []
+            Start = datetime.strptime(Startdate,"%d-%m-%y")
+            End = datetime.strptime(Enddate,"%d-%m-%y")
+            Step = timedelta(days = 1)
+            while Start <= End:
+                dateRange.append(Start.strftime("%d-%m-%y"))
+                Start = Start + Step
+                
+            for i in dateRange:
+                query = """SELECT Sid FROM Student_attendence WHERE date = ?"""
+                ret = conn.execute(query,(i,))
+                ret = ret.fetchall()
+                ret = [x[0] for x in ret]
+                if Sid in ret:
+                    atten.update({i:["P"]})
+                else:
+                    atten.update({i:["A"]})
+            conn.close()
+            return atten
+        else:
+            conn.close()
 
+
+
+
+
+
+
+            
+            
 
 
 

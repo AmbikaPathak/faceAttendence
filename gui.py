@@ -49,6 +49,7 @@ def backdash():
     registerPage.close()
     facultyDash.show()
     
+  
 def capturedata():
     Sid=registerPage.lineEdit_2.text()
     Sname=registerPage.lineEdit.text()
@@ -71,6 +72,8 @@ facultyLoginpage=uic.loadUi('FACE_ATTEND_GUI/faculty_login.ui')
 adminLoginpage=uic.loadUi('FACE_ATTEND_GUI/admin_login.ui')
 facultyDash=uic.loadUi('FACE_ATTEND_GUI/faculty_dashboard.ui')
 registerPage=uic.loadUi('FACE_ATTEND_GUI/student_register.ui')
+See_Attend = uic.loadUi('FACE_ATTEND_GUI/See_Attend.ui')
+
 
 frontPage.show()
 

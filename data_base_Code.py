@@ -16,7 +16,7 @@ con.close()
 
 con = sql.connect('Attendance_System.db')
 
-query = """ CREATE TABLE Student_deatils(SId TEXT PRIMARY KEY,
+query = """ CREATE TABLE student_details(SId TEXT PRIMARY KEY,
 Sname TEXT, Sclass_Id TEXT,Sphone_no INTEGER, 
 Spassword TEXT)"""
 
@@ -51,7 +51,7 @@ sql.register_converter("array", convert_array)
 con = sql.connect('Attendance_System.db',
                   detect_types = sql.PARSE_DECLTYPES)
 query = """CREATE TABLE Student_face_data(SId TEXT,
-arr array, FOREIGN KEY(SId) REFERENCES Student_deatils(SId)
+arr array, FOREIGN KEY(SId) REFERENCES student_details(SId)
 ON DELETE CASCADE ON UPDATE CASCADE)"""
 
 

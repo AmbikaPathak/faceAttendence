@@ -56,6 +56,7 @@ query = """SELECT * FROM student_face_data"""
 ret = conn.execute(query)
 ret = ret.fetchall()
 conn.close()
+conn.commit()
 
 
 while True:
@@ -75,7 +76,7 @@ while True:
         
         for i in ret:
             if cosine(New_Emb,i[1]) < 0.2:
-                conn = sql.connect("attendenceSym.db",detect_types = sql.PARSE_DECLTYPES)
+                conn = sql.connect("Attendence_System.db",detect_types = sql.PARSE_DECLTYPES)
                 query = """INSERT INTO Student_Attendance(SId,date,attendence ) VALUES (?,?,?)"""
                 ret = conn.execute(query,i[0],date.today().strf.time("%d-%m-%y"),"P")
                 conn.close()
